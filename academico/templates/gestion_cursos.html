@@ -1,0 +1,9 @@
+{% extends './base.html' %}
+{% block body %}
+<h1>Ya estamos en la pagina de gestion de cursos</h1>
+    <ul>
+        {% for c in Cursos %}
+        <li>{{c.nombre}}</li>
+        {% endfor %}
+    </ul>
+{% endblock  %}

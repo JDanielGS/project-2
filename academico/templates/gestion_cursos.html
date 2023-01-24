@@ -1,9 +1,54 @@
 {% extends './base.html' %}
 {% block body %}
-<h1>Ya estamos en la pagina de gestion de cursos</h1>
-    <ul>
-        {% for c in Cursos %}
-        <li>{{c.nombre}}</li>
-        {% endfor %}
-    </ul>
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        <h2>Gestión de Cursos</h2>
+        <div class="card">
+            <div class="card-body">
+              <form action="/registrarCurso/" method="POST">{% csrf_token %}
+                <div class="form-group py-2">
+                    <input type="text" id="txtCOD" name="txtCOD" class="form-control" 
+                    placeholder="Código" minlength="6" maxlength="6" required>
+                </div>
+                <div class="form-group py-2">
+                    <input type="text" id="txtNOM" name="txtNOM" class="form-control" 
+                    placeholder="Nombre" maxlength="50" required>
+                </div>
+                <div class="form-group py-2">
+                    <input type="text" id="txtCRED" name="txtCRED" class="form-control" 
+                    min="1" max="9" value="1" required>
+                </div>
+                <div class="form-group py-2">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-success btn-primary" type="submit">Guardar</button>
+                      </div>
+                </div>
+              </form>
+            </div>
+          </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+        <h1>Listado de los Cursos</h1>
+        <div class="table-responsive py-2">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Créditos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in Cursos %}
+                        <tr>
+                            <td>{{c.codigo}}</td>
+                            <td>{{c.nombre}}</td>
+                            <td>{{c.creditos}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 {% endblock  %}

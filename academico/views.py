@@ -1,14 +1,17 @@
 from django.shortcuts import render, redirect
 from .models import curso
+from django.contrib import messages
 
 def home(request):
     Cursos=curso.objects.all()
+    messages.success(request, '!!Cursos Listados¡¡')
     return render(request, "gestion_cursos.html", {"Cursos": Cursos})
 
 def RegistrarCurso(request):
     codigo=request.POST["txtCOD"]
     nombre=request.POST["txtNOM"]
     creditos=request.POST["txtCRED"]
+    messages.success(request, '!!Curso Registrado¡¡')
 
     Curso=curso.objects.create(codigo=codigo, nombre=nombre, creditos=creditos)
 
@@ -16,6 +19,7 @@ def RegistrarCurso(request):
 
 def EliminarCurso(request, codigo):
     Curso=curso.objects.get(codigo=codigo)
+    messages.success(request, '!!Curso Eliminado¡¡')
 
     Curso.delete()
 
@@ -35,5 +39,6 @@ def EditarCurso(request):
     Curso.creditos = creditos
 
     Curso.save()
+    messages.success(request, '!!Curso Actualizado¡¡')
 
     return redirect('/')
